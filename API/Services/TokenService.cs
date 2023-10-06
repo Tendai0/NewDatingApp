@@ -17,11 +17,12 @@ namespace API.Services
 
        public string CreateToken(AppUser user)
 {
-    try
-    {
+    
+    
         var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+            new Claim(JwtRegisteredClaimNames.NameId, user.id.ToString()),
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
         };
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -34,14 +35,7 @@ namespace API.Services
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
-    }
-    catch (Exception ex)
-    {
-        // Handle the exception here
-        Console.WriteLine("An error occurred in CreateToken: " + ex.Message);
-        // You can choose to rethrow the exception or perform other actions
-        throw; // Rethrow the exception to propagate it further
-    }
+    
 }
 
   
