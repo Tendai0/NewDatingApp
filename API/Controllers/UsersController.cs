@@ -97,7 +97,7 @@ namespace API.Controllers
 
       if (photo == null) return NotFound();
 
-      if (photo.IsMain) return BadRequest("This phot is already your main photo");
+      if (photo.IsMain) return BadRequest("This photo is already your main photo");
 
       var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
       if (currentMain != null) currentMain.IsMain = false;
