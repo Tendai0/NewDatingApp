@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities;
 
-public class AppUser
+public class AppUser:IdentityUser<int>
 {
-   public int id { get; set; }
-   public string UserName { get; set; }
-   public byte[] PassWordHarsh { get; set; }
-   public byte[] PassWordSalt { get; set; }
+  
    public DateOnly DateofBirth { get; set; }
    public string KnownAs { get; set; }
    public DateTime Created { get; set; } = DateTime.UtcNow;
@@ -25,4 +23,5 @@ public class AppUser
    public List<UserLike> LikedUsers { get; set; }
    public List<Message> MessagesSent { get; set; }
    public List<Message> MessagesRecieved { get; set; }
+   public ICollection<AppUserRole> UserRoles { get; set; }
 }
